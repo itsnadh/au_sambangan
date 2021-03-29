@@ -1,0 +1,9 @@
+body{
+    /*background-image: url("bg2.jpg");*/
+    background-color: cadetblue ;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*background-color: rgba(255, 255, 255, 0.6);*/
+    background-blend-mode: lighten;
+}
