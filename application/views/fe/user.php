@@ -23,7 +23,7 @@
                     </div>
                     <div class="panel-body">
                         <div id="morris-bar-chart">
-                        	<h4>Silahkan isi formulir pada <a href="<?php echo base_url(); ?>user/register">link berikut</a></h4>
+                        	<h4>Silahkan isi formulir pada <a href="<?php echo base_url(); ?>index.php/user/register">link berikut</a></h4>
 
                         </div>
                     </div>

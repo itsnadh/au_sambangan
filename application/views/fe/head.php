@@ -33,7 +33,7 @@
             <div style="color: white;
                 padding: 15px 50px 5px 50px;
                 float: right;
-                font-size: 16px;"> <!--Login Terahir : <?php //$dt = strtotime($log['upd']); echo date('d-m-Y', $dt); ?> &nbsp;--> <a href="<?php echo base_url().'user/keluar'; ?>" class="btn btn-md btn-danger square-btn-adjust">Logout</a> 
+                font-size: 16px;"> <!--Login Terahir : <?php //$dt = strtotime($log['upd']); echo date('d-m-Y', $dt); ?> &nbsp;--> <a href="<?php echo base_url().'index.php/user/keluar'; ?>" class="btn btn-md btn-danger square-btn-adjust">Logout</a> 
             </div>
         </nav>   
         <!-- /. NAV TOP  -->

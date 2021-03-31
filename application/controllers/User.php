@@ -71,7 +71,7 @@ class User extends CI_Controller {
 	        );
 	        
 	   $this->mod_user->simpan_data($data);
-	   redirect(base_url().'user','refresh');
+	   redirect(base_url().'index.php/user','refresh');
 	}
 	
 	public function ambil_kuota()

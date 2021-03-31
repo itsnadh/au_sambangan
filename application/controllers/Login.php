@@ -31,7 +31,7 @@ class Login extends CI_Controller{
 				);
 				
 				$this->session->set_userdata( $array );
-				redirect(base_url().'admin','refresh');
+				redirect(base_url().'index.php/admin','refresh');
 			}else{
 				$this->session->set_flashdata('gagal', 'Password yang anda masukkan salah..!!');
 				$this->index();

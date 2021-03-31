@@ -59,7 +59,7 @@
                                 <?php
                                     
                                     $attr = array('class'=>'horizontal-form', 'onClick'=>'validasi();');
-                                    echo form_open(base_url().'user/registration', $attr);
+                                    echo form_open(base_url().'index.php/user/registration', $attr);
                                 ?>
                                     <br/>
                                         <div class="form-group row">

@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?php echo base_url(); ?>assets/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin" method="post" action="<?php echo base_url(); ?>index1/proses_login">
+    <form class="form-signin" method="post" action="<?php echo base_url(); ?>index.php/Index1/proses_login">
   <img class="mb-4" src="<?php echo base_url(); ?>assets/logoMAI.png" alt="" width="45%" height="45%">
   <h1 class="h3 mb-3 font-weight-normal">Sambangan <br/> MAI Amanatul Ummah</h1>
   <input type="text" id="" class="form-control" placeholder="Masukkan Username" required  name="username">

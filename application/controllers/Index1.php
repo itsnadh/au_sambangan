@@ -45,7 +45,7 @@ class Index1 extends CI_Controller {
 				// 	$object = array('upd' => $this->createDate = date("Y-m-d H:i:s"), );
 				// 	$this->db->update('siswa_c1', $object);
 
-					redirect(base_url().'user','refresh');
+					redirect(base_url().'index.php/user','refresh');
 				}else{
 					//echo "Password Tidak Sesuai";
 					$this->session->set_flashdata('gagal', 'Password tidak sesuai..!!');

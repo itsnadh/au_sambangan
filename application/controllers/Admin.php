@@ -7,7 +7,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		$this->load->model('mod_admin');
 		if ($this->session->userdata('login') <> 1) {
-        	header('Location: '.base_url().'login');
+        	header('Location: '.base_url().'index.php/login');
     	}
 	}
 
@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 	public function logout()
 	{
 		session_destroy();
-		redirect(base_url().'login','refresh');
+		redirect(base_url().'index.php/login','refresh');
 	}
 	
 	

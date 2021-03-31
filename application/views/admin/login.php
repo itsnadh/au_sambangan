@@ -36,7 +36,7 @@
                 }
 
                 $data = array('class' => 'form-signin', );
-                echo form_open(base_url().'login/login', $data);
+                echo form_open(base_url().'index.php/login/login', $data);
             ?>
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="test" id="inputEmail" name="user" class="form-control" placeholder="Email / Username" required autofocus>
