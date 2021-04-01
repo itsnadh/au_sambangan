@@ -97,7 +97,7 @@
                             	            </td>
                             	            <td></td>
                             	            <td>
-                            	                <a href="#">
+                            	                <a href="<?php echo base_url().'index.php/user/hapus'; ?>">
                             	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
                                                 </a>
                                             </td>
