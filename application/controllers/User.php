@@ -81,6 +81,14 @@ class User extends CI_Controller {
 	   print_r($kuota);
 	}
 	
+	public function hapus()
+	{
+		$data1 = $this->load_data();
+		$where = $this->session->userdata('id');
+		$this->mod_user->hapus_data($data1,'sesi_sambangan');
+		redirect(base_url().'index.php/user','refresh');
+	}
+
 	public function keluar()
 	{
 		session_destroy();

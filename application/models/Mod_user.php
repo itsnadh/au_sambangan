@@ -37,4 +37,10 @@ class Mod_user extends CI_Model {
 	    return $querry->result();
 	    
 	}
+
+	public function hapus_data($where,$table)
+	{
+		// $this->db->where($where);
+		$this->db->delete($where,$table);
+	}
 }
