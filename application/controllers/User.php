@@ -8,6 +8,7 @@ class User extends CI_Controller {
 		parent::__construct();
 // 		$this->load->library('pdf');
 		$this->load->model('mod_user');
+		$this->load->model('mod_admin');
 		$this->load->library('session');
 // 		if ($this->session->userdata('log_user') <> 1) {
 //         	header('Location: '.base_url().'user');
@@ -17,43 +18,40 @@ class User extends CI_Controller {
 	public function index()
 	{
 	   // $data = array('siswa' => $this->mod_user->ambil_data(),);
-	    $data = $this->load_data();
+		$id = $this->session->userdata('id');
+		if(!$id)
+			redirect(base_url().'index.php/');
+
+	    $data = $this->load_data($id);
+		
+		// var_dump($data['bio']); die();
 		$this->load->view('fe/user', $data);
 	}
 	
 	public function register()
 	{
-	    $data = $this->load_data();
-        $kuota = $this->ambil_kuota();
-		$this->load->view('fe/register',$data, $kuota);
-	}
-	
-	public function load_data()
-	{
-	   // $this->session->set_userdata('id',47705);
 		$id = $this->session->userdata('id');
-		return $data = array('bio' =>$this->mod_user->load_data_siswa($id),
-					'log' => $this->mod_user->load_data_sambangan($id), 
-    //                 'info' => $this->mod_home->load_info(),
-    //                 'raport' => $this->mod_home->cek_bukti($id),
-    //                 'tf' => $this->mod_home->cek_tf($id),
-    //                 'foto' => $this->mod_home->cari_foto($id),
-    //                 'pros' => $this->mod_home->getprosedur(),
-    //                 'bank' => $this->mod_home->get_seting('1'), 
-    //                 'nama' => $this->mod_home->get_seting('2'),
-    //                 'jml' => $this->mod_home->get_seting('3'),
-    //                 'nominal' => $this->mod_home->nominal($id),
-    //                 'du_ci' => $this->mod_home->get_daftar_ulang(1),
-    //                 'du_exc' => $this->mod_home->get_daftar_ulang(2),
-    //                 'seragam' => $this->mod_home->get_daftar_ulang(3),
-        );
+		$data['data'] = $this->load_data($id);
+		$data['kuota'] = $this->mod_user->ambil_kuota();
+		$data['sesi'] = $this->mod_admin->ambil_sesi();
+
+		$this->load->view('fe/register', $data);
+	}
+
+	private function load_data($id){
+		return array(
+			'bio' =>$this->mod_user->load_data_siswa($id),
+			'log' => $this->mod_user->load_data_sambangan($id), 
+		);
 	}
 	
 	public function registration()
 	{
-	    $nama_walisantri = $this->input->post('nama_walisantri');
-	    $nama_santri = $this->input->post('nama_santri');
-	    $kelas_santri = $this->input->post('kelas_santri');
+		$id = $this->session->userdata('id');
+		$siswa = $this->mod_user->load_data_siswa($id);
+	    $nama_walisantri = $siswa['nama_walisantri'];
+	    $nama_santri = $siswa['nama_santri'];
+	    $kelas_santri = $siswa['kelas_santri'];
 	    $sesi = $this->input->post('sesi');
 	    $this->createDate = date("Y-m-d H:i:s");
 	    
@@ -68,25 +66,17 @@ class User extends CI_Controller {
 	        'sesi' => $sesi,
 	        'created_at' => $this->createDate,
 	        'date_created' => date("Y-m-d"), 
-	        );
+		);
 	        
 	   $this->mod_user->simpan_data($data);
 	   redirect(base_url().'index.php/user','refresh');
 	}
 	
-	public function ambil_kuota()
+	public function hapus($id)
 	{
-	   // $kuota = array('kuota' => $this->mod_user->ambil_kuota());
-	   $kuota = $this->mod_user->ambil_kuota();
-	   print_r($kuota);
-	}
-	
-	public function hapus()
-	{
-		$data1 = $this->load_data();
-		$where = $this->session->userdata('id');
-		$this->mod_user->hapus_data($data1,'sesi_sambangan');
-		redirect(base_url().'index.php/user','refresh');
+		$this->mod_user->hapus_sambangan($id);
+		
+		redirect(base_url().'index.php/user');
 	}
 
 	public function keluar()
