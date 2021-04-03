@@ -13,7 +13,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-	    $data = array('siswa' => $this->mod_admin->ambil_data(),);
+	    $data = array('siswa' => $this->mod_admin->ambil_data());
 		$this->load->view('admin/index', $data);
 	}
 	

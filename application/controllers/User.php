@@ -17,12 +17,11 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-	   // $data = array('siswa' => $this->mod_user->ambil_data(),);
 		$id = $this->session->userdata('id');
 		if(!$id)
 			redirect(base_url().'index.php/');
 
-	    $data = $this->load_data($id);
+	    $data['log'] = $this->mod_user->load_data_sambangan($id);
 		
 		// var_dump($data['bio']); die();
 		$this->load->view('fe/user', $data);
@@ -31,18 +30,10 @@ class User extends CI_Controller {
 	public function register()
 	{
 		$id = $this->session->userdata('id');
-		$data['data'] = $this->load_data($id);
 		$data['kuota'] = $this->mod_user->ambil_kuota();
 		$data['sesi'] = $this->mod_admin->ambil_sesi();
 
 		$this->load->view('fe/register', $data);
-	}
-
-	private function load_data($id){
-		return array(
-			'bio' =>$this->mod_user->load_data_siswa($id),
-			'log' => $this->mod_user->load_data_sambangan($id), 
-		);
 	}
 	
 	public function registration()
@@ -56,7 +47,7 @@ class User extends CI_Controller {
 	    $this->createDate = date("Y-m-d H:i:s");
 	    
 	    $data = array(
-	        'username' => $this->session->userdata('id'),
+	        'user_id' => $this->session->userdata('id'),
 	        'nama_santri' => $nama_santri,
 	        'nama_walisantri' => $nama_walisantri,
 	        'kelas_santri' => $kelas_santri,
@@ -74,7 +65,8 @@ class User extends CI_Controller {
 	
 	public function hapus($id)
 	{
-		$this->mod_user->hapus_sambangan($id);
+		if($this->mod_user->isSambanganAuthorized($id, $this->session->userdata('id')))
+			$this->mod_user->hapus_sambangan($id);
 		
 		redirect(base_url().'index.php/user');
 	}

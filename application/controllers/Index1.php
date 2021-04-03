@@ -24,27 +24,14 @@ class Index1 extends CI_Controller {
 			$ambil  = $this->mod_user->cek_login($id);
 			if ($ambil) {
 				if ($pass == $ambil['password']) {
-					$biodata = $this->mod_user->load_data_siswa($id);
-					$nama_santri = $biodata['nama_santri'];
-					$nama_walisantri = $biodata['nama_walisantri'];
-					$username = $biodata['username'];
-					//echo $jalur;
-					//die;
-					
-					$sess = array('id' => $id,
-					           'log_user' => 1,
-					           
-					    );
-					
-					$sesi = array('id' => $id,
-								'log_user' => 1, 
-								'nama_santri' => $nama_santri,
-								'nama_walisantri' => $nama_walisantri,);
+					$sess = [
+						'id' => $ambil['id'],
+						'nama_santri' => $ambil['nama_santri'],
+						'nama_walisantri' => $ambil['nama_walisantri'],
+						'kelas_santri' => $ambil['kelas_santri'],
+					];
 					$this->session->set_userdata($sess);
-
-				// 	$object = array('upd' => $this->createDate = date("Y-m-d H:i:s"), );
-				// 	$this->db->update('siswa_c1', $object);
-
+					
 					redirect(base_url().'index.php/user','refresh');
 				}else{
 					//echo "Password Tidak Sesuai";

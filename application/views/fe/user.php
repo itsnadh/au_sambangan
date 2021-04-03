@@ -6,9 +6,7 @@
 	<div id="page-inner">
 		<div class="row">
 			<div class="col-md-12">
-			    <h2>Selamat Datang, <b>Wali santri <?php echo $bio['nama_santri'] ?></b></h2>
-				<!--<h2>Selamat Datang, <b><?php echo $bio['nama']; ?></b></h2>   -->
-				<!--<h5>anda login sebagai : <strong><?php echo $bio['nama']; ?></strong></h5>-->
+			    <h2>Selamat Datang, <b>Wali santri <?php echo $_SESSION['nama_santri'] ?></b></h2>
 			</div>
 		</div>              
 		
@@ -59,9 +57,9 @@
                                           ?>
                             	        <tr>
                             	            <td><?php echo $no ?></td>
-                            	            <td><?php echo $a->nama_santri?></td>
-                            	            <td><?php echo $a->nama_walisantri?></td>
-                            	            <td><?php echo $a->kelas_santri?></td>
+                            	            <td><?php echo $_SESSION['nama_santri'] ?></td>
+                            	            <td><?php echo $_SESSION['nama_walisantri'] ?></td>
+                            	            <td><?php echo $_SESSION['kelas_santri'] ?></td>
                             	            <td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
                             	            <td>
                             	                <a href="<?php echo base_url().'index.php/user/hapus/' . $a->id; ?>">

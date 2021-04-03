@@ -8,16 +8,16 @@ class Mod_user extends CI_Model {
 		return $this->db->get('login_sambangan')->row_array();
 	}
 	
-	public function load_data_siswa($username)
+	public function load_data_siswa($id)
 	{
-		$this->db->where('username', $username);
-		return $this->db->get('data_sambangan')->row_array();
+		$this->db->where('id', $id);
+		return $this->db->get('login_sambangan')->row_array();
 	}
 	
-	public function load_data_sambangan($username)
+	public function load_data_sambangan($id)
 	{
-		$this->db->where('username', $username);
-		$this->db->select('nama_santri, nama_walisantri, kelas_santri, tanggal, jam_mulai, jam_selesai, sesi_sambangan.id');
+		$this->db->where('user_id', $id);
+		$this->db->select('tanggal, jam_mulai, jam_selesai, sesi_sambangan.id');
 		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
 
         return $this->db->get('sesi_sambangan')->result();
@@ -25,7 +25,7 @@ class Mod_user extends CI_Model {
 	
 	public function ambil_data()
 	{
-	    return $this->db->get('data_sambangan')->result();
+	    return $this->db->get('login_sambangan')->result();
 	}
 	
 	public function simpan_data($data)
@@ -51,6 +51,17 @@ class Mod_user extends CI_Model {
 	public function ambil_kuota()
 	{
 		return $this->db->get('sesi_sambangan')->result();
+	}
+
+	public function isSambanganAuthorized($id, $user_id)
+	{
+		$this->db->select('user_id');
+		$this->db->where('id', $id);
+		$id_user = $this->db->get('sesi_sambangan')->result()[0]->user_id;
+		
+		if($user_id != $id_user)
+			return false;
+		return true;
 	}
 
 	public function hapus_sambangan($id)
