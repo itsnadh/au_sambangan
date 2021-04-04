@@ -30,8 +30,6 @@ CREATE TABLE `sesi_sambangan` (
   `nama_santri` varchar(200) NOT NULL,
   `nama_walisantri` varchar(200) NOT NULL,
   `kelas_santri` varchar(200) NOT NULL,
-  `is_aktif` int NOT NULL,
-  `is_offline` int NOT NULL,
   `status` int NOT NULL,
   `sesi` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -44,11 +42,8 @@ CREATE TABLE `sesi_sambangan` (
 -- Dumping data for table `sesi_sambangan`
 --
 
-LOCK TABLES `sesi_sambangan` WRITE;
 /*!40000 ALTER TABLE `sesi_sambangan` DISABLE KEYS */;
-INSERT INTO `sesi_sambangan` VALUES (1,47398,'AHMAD GHULAM RAMADHAN NUGROHO','BASUKI SETYO NUGROHO','XA',0,0,0,'sesi_4','2021-03-17 02:05:57','2021-03-17'),(4,89450,'ACHMAD YUSRON KAFABI','MUSLIM','XA',0,0,0,'sesi_4','2021-03-21 01:37:52','2021-03-16'),(58,47705,'ACHMAD RIFKI ADENAN','ACHMAD TOFANI ADENAN','XA',0,0,0,'9','2021-04-01 10:53:03','2021-04-01'),(57,47705,'ACHMAD RIFKI ADENAN','ACHMAD TOFANI ADENAN','XA',0,0,0,'9','2021-04-01 10:52:58','2021-04-01');
 /*!40000 ALTER TABLE `sesi_sambangan` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

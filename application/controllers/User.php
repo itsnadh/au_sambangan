@@ -8,11 +8,7 @@ class User extends CI_Controller {
 		parent::__construct();
 // 		$this->load->library('pdf');
 		$this->load->model('mod_user');
-		$this->load->model('mod_admin');
 		$this->load->library('session');
-// 		if ($this->session->userdata('log_user') <> 1) {
-//         	header('Location: '.base_url().'user');
-//     	}
 	}
 
 	public function index()
@@ -22,16 +18,15 @@ class User extends CI_Controller {
 			redirect(base_url().'index.php/');
 
 	    $data['log'] = $this->mod_user->load_data_sambangan($id);
-		
-		// var_dump($data['bio']); die();
+
 		$this->load->view('fe/sambangan/index', $data);
 	}
 	
 	public function register()
 	{
-		$id = $this->session->userdata('id');
+		$gender = $this->session->userdata('gender');
 		$data['kuota'] = $this->mod_user->ambil_kuota();
-		$data['sesi'] = $this->mod_admin->ambil_sesi();
+		$data['sesi'] = $this->mod_user->ambil_sesi($gender);
 
 		$this->load->view('fe/sambangan/create', $data);
 	}
@@ -47,20 +42,23 @@ class User extends CI_Controller {
 	    $this->createDate = date("Y-m-d H:i:s");
 	    
 	    $data = array(
-	        'user_id' => $this->session->userdata('id'),
+	        'user_id' => $id,
 	        'nama_santri' => $nama_santri,
 	        'nama_walisantri' => $nama_walisantri,
 	        'kelas_santri' => $kelas_santri,
-	        'is_aktif' => 0,
-	        'is_offline' => 0,
 	        'status' => 0,
 	        'sesi' => $sesi,
 	        'created_at' => $this->createDate,
 	        'date_created' => date("Y-m-d"), 
 		);
-	        
-	   $this->mod_user->simpan_data($data);
-	   redirect(base_url().'index.php/user','refresh');
+
+		if($this->mod_user->checkLastVisit($id, $sesi)){
+			$this->session->set_flashdata('failed', 'Maaf, jatah sambangan anda pada bulan tersebut telah habis');
+			redirect(base_url().'index.php/user','refresh');
+		}
+
+	   	$this->mod_user->simpan_data($data);
+	   	redirect(base_url().'index.php/user','refresh');
 	}
 	
 	public function hapus($id)

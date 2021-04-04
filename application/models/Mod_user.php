@@ -48,9 +48,37 @@ class Mod_user extends CI_Model {
 		$this->db->update('list_sesi');
 	}
 	
+	public function checkLastVisit($id, $sesi)
+	{
+		$this->db->select('tanggal');
+		$this->db->where('user_id', $id);
+		$this->db->order_by('created_at', 'desc');
+		$this->db->limit(1);
+		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
+		$date =  $this->db->get('sesi_sambangan')->result();
+
+		if(!$date)
+			return false;
+
+		$date = $date[0]->tanggal;
+
+		$this->db->select('tanggal');
+		$this->db->where('id', $sesi);
+		$sesi =  $this->db->get('list_sesi')->result()[0]->tanggal;
+		
+		return (int) substr($date, 5, 2) == (int) substr($sesi, 5, 2);
+	}
+	
 	public function ambil_kuota()
 	{
 		return $this->db->get('sesi_sambangan')->result();
+	}
+
+	public function ambil_sesi($gender)
+	{	
+		$this->db->where('gender', $gender);
+		$this->db->where('jadwal_mulai >=', date('Y-m-d H:i:s'));
+		return $this->db->get('list_sesi')->result();
 	}
 
 	public function isSambanganAuthorized($id, $user_id)

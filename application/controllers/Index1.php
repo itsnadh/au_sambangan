@@ -29,6 +29,7 @@ class Index1 extends CI_Controller {
 						'nama_santri' => $ambil['nama_santri'],
 						'nama_walisantri' => $ambil['nama_walisantri'],
 						'kelas_santri' => $ambil['kelas_santri'],
+						'gender' => $ambil['gender'],
 					];
 					$this->session->set_userdata($sess);
 					

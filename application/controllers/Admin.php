@@ -36,12 +36,18 @@ class Admin extends CI_Controller {
 	
 	public function post_sesi()
 	{
+		$jadwal_mulai = $this->input->post('tanggal') . " " . $this->input->post('jam_mulai');
+		$jadwal_selesai = $this->input->post('tanggal') . " " . $this->input->post('jam_selesai');
+
 	    $data = array(
 			'tanggal' => $this->input->post('tanggal'),
 			'jam_mulai' => $this->input->post('jam_mulai'),
 			'jam_selesai' => $this->input->post('jam_selesai'),
 			'kuota' => $this->input->post('kuota'),
 			'sisa' => $this->input->post('kuota'),
+			'gender' => $this->input->post('gender'),
+			'jadwal_mulai' => $jadwal_mulai,
+			'jadwal_selesai' => $jadwal_selesai,
 		);
 
 		$this->mod_admin->simpan_sesi($data);

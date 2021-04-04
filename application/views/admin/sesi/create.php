@@ -25,25 +25,34 @@
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="tanggal" class="form-label">Tanggal</label>
-							<input type="date" name="tanggal" class="form-control">
+							<input required type="date" name="tanggal" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="jam_mulai" class="form-label">Jam Mulai</label>
-							<input type="time" name="jam_mulai" class="form-control">
+							<input required type="time" name="jam_mulai" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="jam_selesai" class="form-label">Jam Selesai</label>
-							<input type="time" name="jam_selesai" class="form-control">
+							<input required type="time" name="jam_selesai" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="kuota" class="form-label">Kuota</label>
-							<input type="number" name="kuota" class="form-control" min="1">
+							<input required type="number" name="kuota" class="form-control" min="1">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-4">
+							<label for="gender" class="form-label">Gender</label>
+							<select required name="gender" class="form-control">
+								<option value="L">Laki-laki</option>
+								<option value="P">Perempuan</option>
+							</select>
 						</div>
 					</div>
 					<div class="row">

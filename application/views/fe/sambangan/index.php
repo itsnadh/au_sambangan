@@ -36,6 +36,17 @@
                         <b>Konfirmasi Sambangan</b>
                     </div>
                     <div class="panel-body">
+						<?php 
+							if($this->session->flashdata('failed') == TRUE){
+						?>
+							<div class="row" style="margin-bottom: 1rem;">
+								<div class="col-md-6 col-md-offset-3 text-center">
+									<div class="bg-warning"><?php print_r($this->session->flashdata('failed')) ?></div>
+								</div>
+							</div>
+						<?php 
+							}
+						?>
                         <div id="morris-bar-chart">
                         	<div class="table-responsive">
                         	    <table id="example" class="table table-striped table-bordered" style="width:100%">

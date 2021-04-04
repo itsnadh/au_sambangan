@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `login_sambangan`;
 CREATE TABLE `login_sambangan` (
   `id` int NOT NULL,
   `nama_santri` varchar(200) NOT NULL,
+  `nama_walisantri` varchar(200) NOT NULL,
   `kelas_santri` varchar(200) NOT NULL,
   `username` int NOT NULL,
   `password` int NOT NULL,
