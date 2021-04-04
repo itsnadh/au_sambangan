@@ -14,7 +14,7 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 	    $data = array('siswa' => $this->mod_admin->ambil_data());
-		$this->load->view('admin/index', $data);
+		$this->load->view('admin/dasbor/index', $data);
 	}
 	
 	public function logout()
@@ -26,12 +26,12 @@ class Admin extends CI_Controller {
 	public function sesi()
 	{
 	    $data['sesi'] = $this->mod_admin->ambil_sesi();
-		$this->load->view('admin/index_sesi', $data);
+		$this->load->view('admin/sesi/index', $data);
 	}
 	
 	public function create_sesi()
 	{
-		$this->load->view('admin/create_sesi');
+		$this->load->view('admin/sesi/create');
 	}
 	
 	public function post_sesi()

@@ -1,6 +1,6 @@
 <?php
-	include 'head.php';
-	include 'side.php';
+	$this->load->view('admin/head');
+	$this->load->view('admin/side');
 	?>
 
       <div id="content-wrapper">
@@ -60,5 +60,5 @@
         <!-- /.container-fluid -->
 
 <?php
-	include 'foot.php';
+	$this->load->view('admin/foot');
 ?>

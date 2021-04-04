@@ -24,7 +24,7 @@ class User extends CI_Controller {
 	    $data['log'] = $this->mod_user->load_data_sambangan($id);
 		
 		// var_dump($data['bio']); die();
-		$this->load->view('fe/user', $data);
+		$this->load->view('fe/sambangan/index', $data);
 	}
 	
 	public function register()
@@ -33,7 +33,7 @@ class User extends CI_Controller {
 		$data['kuota'] = $this->mod_user->ambil_kuota();
 		$data['sesi'] = $this->mod_admin->ambil_sesi();
 
-		$this->load->view('fe/register', $data);
+		$this->load->view('fe/sambangan/create', $data);
 	}
 	
 	public function registration()

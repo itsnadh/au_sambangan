@@ -1,5 +1,5 @@
 <?php 
-	include "head.php";
+	$this->load->view("fe/head");
 ?>
 
 <div id="page-wrapper" >
@@ -89,6 +89,6 @@
 <!-- /. PAGE WRAPPER  -->
 
 <?php
-	include "foot.php";
+	$this->load->view("fe/foot");
 ?>
 	
