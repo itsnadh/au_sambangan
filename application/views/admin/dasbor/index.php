@@ -1,6 +1,6 @@
 <?php
-	include 'head.php';
-	include 'side.php';
+	$this->load->view('admin/head');
+	$this->load->view('admin/side');
 	?>
 
       <div id="content-wrapper">
@@ -28,7 +28,6 @@
                             	            <th>Kelas Santri</th>
                             	            <th>Sesi Sambangan</th>
                             	            <th>Time stamp</th>
-                            	            <th>Tanggal</th>
                             	            <th>Pembatalan</th>
                             	            
                             	        </tr>
@@ -44,39 +43,8 @@
                             	            <td><?php echo $a->nama_santri?></td>
                             	            <td><?php echo $a->nama_walisantri?></td>
                             	            <td><?php echo $a->kelas_santri?></td>
-                            	            <td>
-                            	                <?php 
-                            	                    if ($a->sesi == "sesi_1")
-                            	                    {
-                            	                        echo "sesi 1 (08.00-08.20)";    
-                            	                    }
-                            	                    else if ($a->sesi =="sesi_2")
-                            	                    {
-                            	                        echo "sesi 2 (09.00-09.20)";
-                            	                    }
-                            	                    else if ($a->sesi =="sesi_3")
-                            	                    {
-                            	                        echo "sesi 3 (10.00-10.20)";
-                            	                    }
-                            	                    else if ($a->sesi =="sesi_4")
-                            	                    {
-                            	                        echo "sesi 4 (11.00-11.20)";
-                            	                    }
-                            	                    else if ($a->sesi =="sesi_5")
-                            	                    {
-                            	                        echo "sesi 5 (13.00-13.20)";
-                            	                    }else if ($a->sesi =="sesi_6")
-                            	                    {
-                            	                        echo "sesi 6 (14.00-14.20)";
-                            	                    }
-                            	                    else if ($a->sesi =="sesi_7")
-                            	                    {
-                            	                        echo "sesi 2 (15.00-15.20)";
-                            	                    }
-                            	                ?>
-                            	            </td>
-                            	            <td><?php echo $a->created_at?></td>
-                            	            <td></td>
+                            	            <td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
+                            	            <td><?php echo $a->created_at ?></td>
                             	            <td>
                             	                <a href="#">
                             	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
@@ -104,5 +72,5 @@
         <!-- /.container-fluid -->
 
 <?php
-	include 'foot.php';
+	$this->load->view('admin/foot');
 ?>

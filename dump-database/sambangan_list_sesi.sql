@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `sambangan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `sambangan`;
+/* CREATE DATABASE  IF NOT EXISTS `sambangan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+/* USE `sambangan`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sambangan
@@ -31,6 +31,9 @@ CREATE TABLE `list_sesi` (
   `tanggal` date NOT NULL,
   `jam_mulai` varchar(6) NOT NULL,
   `jam_selesai` varchar(6) NOT NULL,
+  `gender` char(1) NOT NULL,
+  `jadwal_mulai` datetime NOT NULL,
+  `jadwal_selesai` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,11 +42,8 @@ CREATE TABLE `list_sesi` (
 -- Dumping data for table `list_sesi`
 --
 
-LOCK TABLES `list_sesi` WRITE;
 /*!40000 ALTER TABLE `list_sesi` DISABLE KEYS */;
-INSERT INTO `list_sesi` VALUES (9,20,18,'2021-04-02','10:00','12:00');
 /*!40000 ALTER TABLE `list_sesi` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

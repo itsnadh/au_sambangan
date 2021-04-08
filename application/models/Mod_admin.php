@@ -5,7 +5,10 @@ class Mod_admin extends CI_Model {
 
 	public function ambil_data()
 	{
-		return $this->db->get('sesi_sambangan')->result();
+		$this->db->select('nama_santri, nama_walisantri, kelas_santri, tanggal, jam_mulai, jam_selesai, sesi_sambangan.id, created_at');
+		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
+
+        return $this->db->get('sesi_sambangan')->result();
 	}
 
 	public function ambil_sesi()

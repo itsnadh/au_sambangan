@@ -1,14 +1,12 @@
 <?php 
-	include "head.php";
+	$this->load->view("fe/head");
 ?>
 
 <div id="page-wrapper" >
 	<div id="page-inner">
 		<div class="row">
 			<div class="col-md-12">
-			    <h2>Selamat Datang, <b>Wali santri <?php echo $bio['nama_santri'] ?></b></h2>
-				<!--<h2>Selamat Datang, <b><?php echo $bio['nama']; ?></b></h2>   -->
-				<!--<h5>anda login sebagai : <strong><?php echo $bio['nama']; ?></strong></h5>-->
+			    <h2>Selamat Datang, <b>Wali santri <?php echo $_SESSION['nama_santri'] ?></b></h2>
 			</div>
 		</div>              
 		
@@ -38,6 +36,17 @@
                         <b>Konfirmasi Sambangan</b>
                     </div>
                     <div class="panel-body">
+						<?php 
+							if($this->session->flashdata('failed') == TRUE){
+						?>
+							<div class="row" style="margin-bottom: 1rem;">
+								<div class="col-md-6 col-md-offset-3 text-center">
+									<div class="bg-warning"><?php print_r($this->session->flashdata('failed')) ?></div>
+								</div>
+							</div>
+						<?php 
+							}
+						?>
                         <div id="morris-bar-chart">
                         	<div class="table-responsive">
                         	    <table id="example" class="table table-striped table-bordered" style="width:100%">
@@ -59,9 +68,9 @@
                                           ?>
                             	        <tr>
                             	            <td><?php echo $no ?></td>
-                            	            <td><?php echo $a->nama_santri?></td>
-                            	            <td><?php echo $a->nama_walisantri?></td>
-                            	            <td><?php echo $a->kelas_santri?></td>
+                            	            <td><?php echo $_SESSION['nama_santri'] ?></td>
+                            	            <td><?php echo $_SESSION['nama_walisantri'] ?></td>
+                            	            <td><?php echo $_SESSION['kelas_santri'] ?></td>
                             	            <td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
                             	            <td>
                             	                <a href="<?php echo base_url().'index.php/user/hapus/' . $a->id; ?>">
@@ -91,6 +100,6 @@
 <!-- /. PAGE WRAPPER  -->
 
 <?php
-	include "foot.php";
+	$this->load->view("fe/foot");
 ?>
 	

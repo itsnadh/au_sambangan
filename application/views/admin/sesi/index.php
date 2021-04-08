@@ -1,6 +1,6 @@
 <?php
-	include 'head.php';
-	include 'side.php';
+	$this->load->view('admin/head');
+	$this->load->view('admin/side');
 	?>
 
       <div id="content-wrapper">
@@ -24,6 +24,7 @@
 							<tr>
 								<th>No</th>
 								<th>Jadwal Sesi</th>
+								<th>Gender</th>
 								<th>Aksi</th>
 							</tr>
 						</thead>
@@ -36,6 +37,7 @@
 							<tr>
 								<td><?php echo $no ?></td>
 								<td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
+								<td><?php echo $a->gender == "P" ? "Perempuan" : "Laki-laki" ?></td>
 								<td>
 									<a href="<?php echo base_url().'index.php/admin/hapus_sesi/' . $a->id; ?>">
 										<button class="btn btn-xs btn-danger">Hapus</button>
@@ -60,5 +62,5 @@
         <!-- /.container-fluid -->
 
 <?php
-	include 'foot.php';
+	$this->load->view('admin/foot');
 ?>

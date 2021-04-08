@@ -8,16 +8,16 @@ class Mod_user extends CI_Model {
 		return $this->db->get('login_sambangan')->row_array();
 	}
 	
-	public function load_data_siswa($username)
+	public function load_data_siswa($id)
 	{
-		$this->db->where('username', $username);
-		return $this->db->get('data_sambangan')->row_array();
+		$this->db->where('id', $id);
+		return $this->db->get('login_sambangan')->row_array();
 	}
 	
-	public function load_data_sambangan($username)
+	public function load_data_sambangan($id)
 	{
-		$this->db->where('username', $username);
-		$this->db->select('nama_santri, nama_walisantri, kelas_santri, tanggal, jam_mulai, jam_selesai, sesi_sambangan.id');
+		$this->db->where('user_id', $id);
+		$this->db->select('tanggal, jam_mulai, jam_selesai, sesi_sambangan.id');
 		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
 
         return $this->db->get('sesi_sambangan')->result();
@@ -25,7 +25,7 @@ class Mod_user extends CI_Model {
 	
 	public function ambil_data()
 	{
-	    return $this->db->get('data_sambangan')->result();
+	    return $this->db->get('login_sambangan')->result();
 	}
 	
 	public function simpan_data($data)
@@ -48,9 +48,48 @@ class Mod_user extends CI_Model {
 		$this->db->update('list_sesi');
 	}
 	
+	public function checkLastVisit($id, $sesi)
+	{
+		$this->db->select('tanggal');
+		$this->db->where('user_id', $id);
+		$this->db->order_by('created_at', 'desc');
+		$this->db->limit(1);
+		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
+		$date =  $this->db->get('sesi_sambangan')->result();
+
+		if(!$date)
+			return false;
+
+		$date = $date[0]->tanggal;
+
+		$this->db->select('tanggal');
+		$this->db->where('id', $sesi);
+		$sesi =  $this->db->get('list_sesi')->result()[0]->tanggal;
+		
+		return (int) substr($date, 5, 2) == (int) substr($sesi, 5, 2);
+	}
+	
 	public function ambil_kuota()
 	{
 		return $this->db->get('sesi_sambangan')->result();
+	}
+
+	public function ambil_sesi($gender)
+	{	
+		$this->db->where('gender', $gender);
+		$this->db->where('jadwal_mulai >=', date('Y-m-d H:i:s'));
+		return $this->db->get('list_sesi')->result();
+	}
+
+	public function isSambanganAuthorized($id, $user_id)
+	{
+		$this->db->select('user_id');
+		$this->db->where('id', $id);
+		$id_user = $this->db->get('sesi_sambangan')->result()[0]->user_id;
+		
+		if($user_id != $id_user)
+			return false;
+		return true;
 	}
 
 	public function hapus_sambangan($id)

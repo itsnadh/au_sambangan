@@ -39,19 +39,19 @@
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-3 col-form-label" style="text-align: right;">Nama Lengkap Wali Santri</label>
                                             <div class="col-sm-8">
-												<?php echo $data['bio']['nama_walisantri']; ?>
+												<?php echo $_SESSION['nama_walisantri']; ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="nama" class="col-sm-3 col-form-label" style="text-align: right;">Nama Lengkap Santri</label>
                                             <div class="col-sm-8">
-												<?php echo $data['bio']['nama_santri']; ?>
+												<?php echo $_SESSION['nama_santri']; ?>
 											</div>
                                         </div>
                                         <div class="form-group row" style="margin-bottom: 0;">
                                             <label for="program" class="col-sm-3 col-form-label" style="text-align: right; font-size: 15pt;">Kelas</label>
                                             <div class="col-sm-8 maxl">
-												<?php echo $data['bio']['kelas_santri']; ?>
+												<?php echo $_SESSION['kelas_santri']; ?>
                                             </div>
                                         </div>
                                         <br/>
