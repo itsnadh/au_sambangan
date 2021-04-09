@@ -49,16 +49,21 @@ class User extends CI_Controller {
 	        'status' => 0,
 	        'sesi' => $sesi,
 	        'created_at' => $this->createDate,
-	        'date_created' => date("Y-m-d"), 
+	        'date_created' => date("Y-m-d"),
 		);
+
+		if(!$this->mod_user->quotaCheck($sesi)){
+			$this->session->set_flashdata('failed', 'Maaf, kuota sambangan pada sesi tersebut telah habis');
+			redirect(base_url().'index.php/user');
+		}
 
 		if($this->mod_user->checkLastVisit($id, $sesi)){
 			$this->session->set_flashdata('failed', 'Maaf, jatah sambangan anda pada bulan tersebut telah habis');
-			redirect(base_url().'index.php/user','refresh');
+			redirect(base_url().'index.php/user');
 		}
 
 	   	$this->mod_user->simpan_data($data);
-	   	redirect(base_url().'index.php/user','refresh');
+	   	redirect(base_url().'index.php/user');
 	}
 	
 	public function hapus($id)

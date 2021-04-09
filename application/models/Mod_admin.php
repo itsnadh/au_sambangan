@@ -13,12 +13,25 @@ class Mod_admin extends CI_Model {
 
 	public function ambil_sesi()
 	{
+		$this->db->select('id, gender, kuota, tanggal, jam_mulai, jam_selesai, COUNT(*) as used');
+		$this->db->group_by('id, gender, kuota, tanggal, jam_mulai, jam_selesai');
 		return $this->db->get('list_sesi')->result();
 	}
 
-	public function simpan_sesi($data)
+	public function simpan_sesi($data, $id)
 	{
-		$this->db->insert('list_sesi', $data);
+		if($id){
+			$data['id'] = $id;
+			return $this->db->replace('list_sesi', $data);
+		}
+
+		else return $this->db->insert('list_sesi', $data);
+	}
+
+	public function getSesiByID($id)
+	{
+		$this->db->where('id', $id);
+		return $this->db->get('list_sesi')->result()[0];
 	}
 
 	public function hapus_sesi($id)

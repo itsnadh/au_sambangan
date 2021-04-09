@@ -17,42 +17,42 @@
           <!-- Icon Cards-->
           <div class="row">
 			<div class="container">
-				<h3>Buat Sesi</h3>
+				<h3>Ubah Sesi</h3>
 				<?php        
 					$attr = array('class'=>'horizontal-form', 'onClick'=>'validasi();');
-					echo form_open(base_url().'index.php/admin/post_sesi');
+					echo form_open(base_url() . 'index.php/admin/post_sesi/' . $data->id);
 				?>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="tanggal" class="form-label">Tanggal</label>
-							<input required type="date" name="tanggal" class="form-control">
+							<input required type="date" name="tanggal" value="<?php echo $data->tanggal ?>" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="jam_mulai" class="form-label">Jam Mulai</label>
-							<input required type="time" name="jam_mulai" class="form-control">
+							<input required type="time" name="jam_mulai" value="<?php echo $data->jam_mulai ?>" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="jam_selesai" class="form-label">Jam Selesai</label>
-							<input required type="time" name="jam_selesai" class="form-control">
+							<input required type="time" name="jam_selesai" value="<?php echo $data->jam_selesai ?>" class="form-control">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="kuota" class="form-label">Kuota</label>
-							<input required type="number" name="kuota" class="form-control" min="1">
+							<input required type="number" name="kuota" value="<?php echo $data->kuota ?>" class="form-control" min="1">
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-4">
 							<label for="gender" class="form-label">Gender</label>
 							<select required name="gender" class="form-control">
-								<option selected disabled>-- Pilih Gender --</option>
-								<option value="L">Laki-laki</option>
-								<option value="P">Perempuan</option>
+								<option disabled>-- Pilih Gender --</option>
+								<option value="L" <?php echo ($data->gender == "L"? "selected":"") ?>>Laki-laki</option>
+								<option value="P" <?php echo ($data->gender == "P"? "selected":"") ?>>Perempuan</option>
 							</select>
 						</div>
 					</div>

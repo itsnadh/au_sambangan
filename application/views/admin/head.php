@@ -11,7 +11,6 @@
     <link rel="icon" href="<?php echo base_url('assets/logo.png'); ?>">
     
     <title>ADMIN | SAMBANGAN</title>
-    <script type="text/javascript" src="<?php echo base_url().'assets/jquery-3.3.1.min.js';?>"></script>
 
     <!-- Bootstrap core CSS-->
     <link href="<?php echo base_url().'assets/admin/'; ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +26,6 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url().'assets/admin/'; ?>css/sb-admin.css" rel="stylesheet">
-    <script src="<?php echo base_url().'assets/tinymce/js/tinymce/tinymce.min.js'; ?>" type="text/javascript"></script>
-    <script src="<?php echo base_url().'assets/ckeditor/ckeditor.js'; ?>" type="text/javascript"></script>
 
   </head>
 

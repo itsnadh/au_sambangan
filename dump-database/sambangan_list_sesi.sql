@@ -27,7 +27,6 @@ DROP TABLE IF EXISTS `list_sesi`;
 CREATE TABLE `list_sesi` (
   `id` int NOT NULL AUTO_INCREMENT,
   `kuota` int NOT NULL,
-  `sisa` int NOT NULL,
   `tanggal` date NOT NULL,
   `jam_mulai` varchar(6) NOT NULL,
   `jam_selesai` varchar(6) NOT NULL,

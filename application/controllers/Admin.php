@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/sesi/create');
 	}
 	
-	public function post_sesi()
+	public function post_sesi($id = null)
 	{
 		$jadwal_mulai = $this->input->post('tanggal') . " " . $this->input->post('jam_mulai');
 		$jadwal_selesai = $this->input->post('tanggal') . " " . $this->input->post('jam_selesai');
@@ -44,15 +44,21 @@ class Admin extends CI_Controller {
 			'jam_mulai' => $this->input->post('jam_mulai'),
 			'jam_selesai' => $this->input->post('jam_selesai'),
 			'kuota' => $this->input->post('kuota'),
-			'sisa' => $this->input->post('kuota'),
 			'gender' => $this->input->post('gender'),
 			'jadwal_mulai' => $jadwal_mulai,
 			'jadwal_selesai' => $jadwal_selesai,
 		);
 
-		$this->mod_admin->simpan_sesi($data);
+		$this->mod_admin->simpan_sesi($data, $id);
 
 		redirect(base_url().'index.php/admin/sesi');
+	}
+	
+	public function edit_sesi($id)
+	{
+		$data['data'] = $this->mod_admin->getSesiByID($id);
+
+		$this->load->view('admin/sesi/edit', $data);
 	}
 	
 	public function hapus_sesi($id)

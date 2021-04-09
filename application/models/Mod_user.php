@@ -30,22 +30,17 @@ class Mod_user extends CI_Model {
 	
 	public function simpan_data($data)
 	{
-		$this->db->insert('sesi_sambangan', $data);
-
-		$this->update_kuota($data['sesi'], false);
+		return $this->db->insert('sesi_sambangan', $data);
 	}
 
-	private function update_kuota($id, $add = true)
+	public function quotaCheck($id)
 	{
-		$this->db->select('sisa');
-		$this->db->where('id', $id);
-		$sisa = $this->db->get('list_sesi')->result()[0]->sisa;
+		$this->db->select('kuota');
+		$this->db->where('list_sesi.id', $id);
+		$this->db->join('sesi_sambangan', 'list_sesi.id = sesi_sambangan.sesi');
+		$data = $this->db->get('list_sesi')->result();
 		
-		$test = $add ? $sisa+1 : $sisa-1;
-		// var_dump($test); die();
-
-		$this->db->set('sisa', $test);
-		$this->db->update('list_sesi');
+		return count($data) < $data[0]->kuota;
 	}
 	
 	public function checkLastVisit($id, $sesi)
@@ -96,12 +91,9 @@ class Mod_user extends CI_Model {
 	{
 		$this->db->select('sesi');
 		$this->db->where('id', $id);
-		$sesi = $this->db->get('sesi_sambangan')->result()[0]->sesi;
 
 		$this->db->where('id', $id);
-		$this->db->delete('sesi_sambangan');
-
-		return $this->update_kuota($sesi);
+		return $this->db->delete('sesi_sambangan');
 	}
 	//sdasd
 }
