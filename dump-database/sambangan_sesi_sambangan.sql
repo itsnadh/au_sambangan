@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `sesi_sambangan`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sesi_sambangan` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   `nama_santri` varchar(200) NOT NULL,
   `nama_walisantri` varchar(200) NOT NULL,
   `kelas_santri` varchar(200) NOT NULL,
