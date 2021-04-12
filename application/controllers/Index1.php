@@ -33,22 +33,22 @@ class Index1 extends CI_Controller {
 					];
 					$this->session->set_userdata($sess);
 					
-					redirect(base_url().'index.php/user','refresh');
+					redirect(base_url().'index.php/user');
 				}else{
 					//echo "Password Tidak Sesuai";
 					$this->session->set_flashdata('gagal', 'Password tidak sesuai..!!');
 
-					redirect(base_url().'','refresh');
+					redirect(base_url());
 				}
 			}else{
 				//echo "Nomor Peserta Tidak ditemukan";
 				$this->session->set_flashdata('gagal', 'Nomor peserta tidak ditemukan..!!');
-				redirect(base_url().'','refresh');
+				redirect(base_url());
 			}
 		}else{
 			//echo "Masukkan Nomor Peserta dan Password dengan benar..";
 			$this->session->set_flashdata('gagal', 'Masukkan Nomor Peserta dan Password dengan benar..!!');
-			redirect(base_url().'','refresh');
+			redirect(base_url());
 		}
 	}
 }
