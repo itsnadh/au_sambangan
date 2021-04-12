@@ -44,9 +44,9 @@
 								<td><?php echo $a->kuota - $a->used ?></td>
 								<td>
 									<a href="<?php echo base_url().'index.php/admin/edit_sesi/' . $a->id; ?>">
-										<button class="btn btn-xs btn-info">Edit</button>
+										<button class="btn btn-xs btn-info">Ubah</button>
 									</a>
-									<a href="<?php echo base_url().'index.php/admin/hapus_sesi/' . $a->id; ?>">
+									<a href="#" onclick="deleteSesi('<?php echo $a->id ?>')">
 										<button class="btn btn-xs btn-danger">Hapus</button>
 									</a>
 								</td>
@@ -62,10 +62,17 @@
         <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript">
-        $(document).ready(function() {
-            $('#example').DataTable();
-        } );
+			$(document).ready(function() {
+				$('#example').DataTable();
+			} );
         </script>
+        <script type="text/javascript">
+			function deleteSesi(id){
+				const del = confirm("Apakah anda yakin?")
+				if (del)
+					window.location = '<?php echo base_url().'index.php/admin/hapus_sesi/'; ?>' + id
+			}
+		</script>
         <!-- /.container-fluid -->
 
 <?php

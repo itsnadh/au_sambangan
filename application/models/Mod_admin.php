@@ -13,8 +13,10 @@ class Mod_admin extends CI_Model {
 
 	public function ambil_sesi()
 	{
-		$this->db->select('id, gender, kuota, tanggal, jam_mulai, jam_selesai, COUNT(*) as used');
-		$this->db->group_by('id, gender, kuota, tanggal, jam_mulai, jam_selesai');
+		$this->db->select('list_sesi.id, gender, kuota, tanggal, jam_mulai, jam_selesai, COUNT(sesi) as used');
+		$this->db->join('sesi_sambangan', 'list_sesi.id = sesi_sambangan.sesi', 'left');
+		$this->db->group_by('list_sesi.id, gender, kuota, tanggal, jam_mulai, jam_selesai');
+		
 		return $this->db->get('list_sesi')->result();
 	}
 

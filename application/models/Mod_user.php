@@ -35,12 +35,12 @@ class Mod_user extends CI_Model {
 
 	public function quotaCheck($id)
 	{
-		$this->db->select('kuota');
-		$this->db->where('list_sesi.id', $id);
-		$this->db->join('sesi_sambangan', 'list_sesi.id = sesi_sambangan.sesi');
+		$this->db->select('list_sesi.id, kuota, COUNT(sesi) as used');
+		$this->db->join('sesi_sambangan', 'list_sesi.id = sesi_sambangan.sesi', 'left');
+		$this->db->group_by('list_sesi.id, kuota');
 		$data = $this->db->get('list_sesi')->result();
 		
-		return count($data) < $data[0]->kuota;
+		return $data[0]->used < $data[0]->kuota;
 	}
 	
 	public function checkLastVisit($id, $sesi)

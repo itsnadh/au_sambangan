@@ -73,7 +73,7 @@
                             	            <td><?php echo $_SESSION['kelas_santri'] ?></td>
                             	            <td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
                             	            <td>
-                            	                <a href="<?php echo base_url().'index.php/user/hapus/' . $a->id; ?>">
+                            	                <a onclick="deleteSambangan(<?php echo $a->id ?>)" href="#">
                             	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
                                                 </a>
                             	                <a href="#">
@@ -102,4 +102,11 @@
 <?php
 	$this->load->view("fe/foot");
 ?>
-	
+
+<script type="text/javascript">
+	function deleteSambangan(id){
+		const del = confirm("Apakah anda yakin?")
+		if (del)
+			window.location = '<?php echo base_url().'index.php/user/hapus/'; ?>' + id
+	}
+</script>
