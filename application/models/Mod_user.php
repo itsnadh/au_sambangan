@@ -63,16 +63,17 @@ class Mod_user extends CI_Model {
 		
 		return (int) substr($date, 5, 2) == (int) substr($sesi, 5, 2);
 	}
-	
-	public function ambil_kuota()
-	{
-		return $this->db->get('sesi_sambangan')->result();
-	}
 
-	public function ambil_sesi($gender)
+	public function ambil_sesi($gender, $kuota = false)
 	{	
 		$this->db->where('gender', $gender);
 		$this->db->where('jadwal_mulai >=', date('Y-m-d H:i:s'));
+
+		if($kuota){
+			$this->db->select('id, tanggal, jam_mulai, jam_selesai, kuota, COUNT(id) as used');
+			$this->db->group_by('id, tanggal, jam_mulai, jam_selesai, kuota');
+		}
+
 		return $this->db->get('list_sesi')->result();
 	}
 

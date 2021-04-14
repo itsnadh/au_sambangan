@@ -25,8 +25,7 @@ class User extends CI_Controller {
 	public function register()
 	{
 		$gender = $this->session->userdata('gender');
-		$data['kuota'] = $this->mod_user->ambil_kuota();
-		$data['sesi'] = $this->mod_user->ambil_sesi($gender);
+		$data['sesi'] = $this->mod_user->ambil_sesi($gender, true);
 
 		$this->load->view('fe/sambangan/create', $data);
 	}

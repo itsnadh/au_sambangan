@@ -59,12 +59,13 @@
                                             <label for="program" class="col-sm-3 col-form-label" style="text-align: right; font-size: 15pt;">Pilih Sesi Sambangan</label>
                                             <div class="col-sm-8 maxl">
 												<select class="custom-select" required="true" name="sesi" id="sesi">
-													<option selected disabled>-- Pilih Sesi --</option>
+													<option selected disabled>-- Sesi / Sisa Kuota --</option>
 													<?php
 														foreach ($sesi as $a) {
+															$sisa = $a->kuota - $a->used;
 													?>
-														<option value="<?php echo $a->id ?>">
-															<?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?>
+														<option value="<?php echo $a->id ?>" <?php echo (!$sisa ? "disabled":"") ?>>
+															<?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai . ' / ' . ($sisa ?: "Habis")) ?>
 														</option>
 													<?php } ?>
 												</select>
