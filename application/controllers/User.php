@@ -9,6 +9,7 @@ class User extends CI_Controller {
 // 		$this->load->library('pdf');
 		$this->load->model('mod_user');
 		$this->load->library('session');
+		$this->load->library('Pdf');
 	}
 
 	public function index()
@@ -77,6 +78,88 @@ class User extends CI_Controller {
 	public function kartu()
 	{
 		$this->load->view('fe/sambangan/kartu/kartu');
+	}
+
+	public function cetak()
+	{
+		error_reporting(0);
+		$pdf = new FPDF('P','mm','Letter');
+		$pdf->AddPage();
+		$pdf->Rect(10, 7, 190, 90, 'D');
+		$pdf->SetTitle("Cetak Kartu Sambangan");
+		$urr = base_url()."assets/user/kartu/logoMAI.png";
+        $pdf->Image($urr,20,10,30,30); 
+		$pdf->Cell(25);
+        $pdf->SetFont('Times','B','12');
+		$pdf->Cell(0,5,"KARTU SAMBANGAN WALISANTRI",0,1,'C');
+		$pdf->Ln(2);
+        $pdf->Cell(25);
+        $pdf->SetFont('Times','B','16');
+		$pdf->Cell(0,5,'MADRASAH ALIYAH ISTIMEWA',0,1,'C');
+		$pdf->Ln(2);
+        $pdf->Cell(25);
+        $pdf->SetFont('Times','B','20');
+        $pdf->Cell(0,5,'AMANATUL UMMAH',0,1,'C');
+		$pdf->Ln(2);
+        $pdf->Cell(25);
+        $pdf->SetFont('Times','B','12');
+        $pdf->Cell(0,5,'Program Layanan SKS 2 Tahun dan 3 Tahun',0,1,'C');
+        $pdf->Cell(25);
+        $pdf->SetFont('Times','B','12');
+        $pdf->Cell(0,5,"Tahun Pelajaran 2021/2022",0,1,'C');
+		$pdf->Ln(2);
+        $pdf->Cell(25);
+        $pdf->SetLineWidth(1);
+        $pdf->Line(20,42,190,42);
+        $pdf->SetLineWidth(0);
+        $pdf->Line(20,43,190,43);
+		
+		$pdf->Ln(10);
+        $pdf->Cell(10);
+        $pdf->SetFont('Times','', '12');
+        $pdf->Cell(50,5,'NAMA WALISANTRI',0,0);
+        $pdf->Cell(3,5,':',0,0);
+        $pdf->SetFont('Times','B', '12');
+        $pdf->Cell(80,5,'NAMA WALISANTRI',0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(10);
+        $pdf->SetFont('Times','', '12');
+        $pdf->Cell(50,5,'NAMA SANTRI',0,0);
+        $pdf->Cell(3,5,':',0,0);
+        $pdf->SetFont('Times','B', '12');
+        $pdf->Cell(80,5,'NAMA SANTRI',0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(10);
+        $pdf->SetFont('Times','', '12');
+        $pdf->Cell(50,5,'KELAS',0,0);
+        $pdf->Cell(3,5,':',0,0);
+        $pdf->SetFont('Times','B', '12');
+        $pdf->Cell(80,5,'KELAS SANTRI',0,0);
+		$pdf->Ln(6);
+        $pdf->Cell(10);
+		$pdf->SetFont('Times','', '12');
+        $pdf->Cell(50,5,'TANGGAL',0,0);
+        $pdf->Cell(3,5,':',0,0);
+        $pdf->SetFont('Times','B', '12');
+        $pdf->Cell(80,5,'TANGGAL',0,0);
+		$pdf->Ln(6);
+        $pdf->Cell(10);
+		$pdf->SetFont('Times','', '12');
+        $pdf->Cell(50,5,'SESI',0,0);
+        $pdf->Cell(3,5,':',0,0);
+        $pdf->SetFont('Times','B', '12');
+        $pdf->Cell(80,5,'SESI SANTRI',0,0);
+		$pdf->Ln(6);
+        $pdf->Cell(10);
+		$pdf->SetFont('Times','', '12');
+        $pdf->Cell(50,5,'BILIK',0,0);
+        $pdf->Cell(3,5,':',0,0);
+        $pdf->SetFont('Times','B', '12');
+        $pdf->Cell(80,5,'BILIK',0,0);
+		$pdf->Ln(6);
+        $pdf->Cell(10);
+
+		$pdf->Output();
 	}
 
 	public function keluar()
