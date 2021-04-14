@@ -1,0 +1,32 @@
+body {
+    padding-top: 50px;
+}
+
+.bio {
+    padding-top: 42px;
+    padding-bottom: 42px;
+}
+
+.header {
+    text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 12PX;
+}
+
+.nb {
+    padding-top: 20px;
+}
+
+body .main {
+    border-style: solid;    
+}
+
+.row1 {
+    padding-top: 28px;
+    border-bottom: solid;
+}

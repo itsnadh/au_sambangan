@@ -74,6 +74,11 @@ class User extends CI_Controller {
 		redirect(base_url().'index.php/user');
 	}
 
+	public function kartu()
+	{
+		$this->load->view('fe/sambangan/kartu/kartu');
+	}
+
 	public function keluar()
 	{
 		session_destroy();
