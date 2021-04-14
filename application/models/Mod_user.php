@@ -77,15 +77,33 @@ class Mod_user extends CI_Model {
 		return $this->db->get('list_sesi')->result();
 	}
 
-	public function isSambanganAuthorized($id, $user_id)
+	public function isSambanganAuthorized($id, $user_id, $cetak = false)
 	{
-		$this->db->select('user_id');
-		$this->db->where('id', $id);
-		$id_user = $this->db->get('sesi_sambangan')->result()[0]->user_id;
-		
-		if($user_id != $id_user)
-			return false;
-		return true;
+		$this->db->select('1');
+		$this->db->where('sesi_sambangan.id', $id);
+		$this->db->where('user_id', $user_id);
+		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
+
+		if($cetak)
+			$this->db->where('jadwal_selesai >=', date('Y-m-d H:i:s'));
+
+		try {
+			$data = $this->db->get('sesi_sambangan')->result()[0];
+			
+			if($data)
+				return true;
+		} catch (\Throwable $th) {}
+
+		return false;
+	}
+
+	public function getPrintData($id)
+	{
+		$this->db->select('list_sesi.id, tanggal, jam_mulai, jam_selesai, nama_santri, nama_walisantri, kelas_santri');
+		$this->db->where('sesi_sambangan.id', $id);
+		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
+
+		return $this->db->get('sesi_sambangan')->result()[0];
 	}
 
 	public function hapus_sambangan($id)
@@ -96,5 +114,4 @@ class Mod_user extends CI_Model {
 		$this->db->where('id', $id);
 		return $this->db->delete('sesi_sambangan');
 	}
-	//sdasd
 }

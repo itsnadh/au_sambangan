@@ -76,7 +76,7 @@
                             	                <a onclick="deleteSambangan(<?php echo $a->id ?>)" href="#">
                             	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
                                                 </a>
-                            	                <a href="<?php echo base_url(); ?>index.php/user/cetak">
+                            	                <a href="<?php echo base_url() . 'index.php/user/cetak/' . $a->id; ?>">
                             	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #29BF5B; border:none">Cetak Kartu</button>
                                                 </a>
                                             </td>
