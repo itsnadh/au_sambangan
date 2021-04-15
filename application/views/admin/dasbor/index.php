@@ -26,8 +26,9 @@
 							<th>Nama Walisantri</th>
 							<th>Kelas Santri</th>
 							<th>Sesi Sambangan</th>
-							<th>Time stamp</th>
-							<th>Pembatalan</th>
+							<th>Timestamp</th>
+							<th>Status</th>
+							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,9 +45,33 @@
 							<td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
 							<td><?php echo $a->created_at ?></td>
 							<td>
-								<a href="#">
-									<button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
-								</a>
+								<?php
+								if(time() > strtotime($a->tanggal . ' ' . $a->jam_selesai)):
+									echo "Selesai";
+								else:
+									switch ((string) $a->status) {
+										case '0':
+											echo "Diajukan";
+											break;
+
+										case '1':
+											echo "OK";
+											break;
+
+										case '2':
+											echo "Ditolak";
+											break;
+									}
+								endif;
+								?>
+							</td>
+							<td>
+								<?php
+									if(!((int) $a->status)):?>
+										<a href="<?php echo base_url() . 'index.php/admin/update_status_sambangan/' . $a->id . '/2'; ?>" class="btn btn-xs btn-danger">Tolak</a>
+										<a href="<?php echo base_url() . 'index.php/admin/update_status_sambangan/' . $a->id . '/1'; ?>" class="btn btn-xs btn-success">Terima</a>
+								<?php else: echo "-"; ?>
+								<?php endif; ?>
 							</td>
 							
 							<?php $no++ ?>

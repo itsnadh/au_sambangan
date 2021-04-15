@@ -67,4 +67,11 @@ class Admin extends CI_Controller {
 
 		redirect(base_url().'index.php/admin/sesi');
 	}
+
+	public function update_status_sambangan($id, $status)
+	{
+		$this->mod_admin->update_status_sambangan($id, $status);
+
+		redirect(base_url().'index.php/admin');
+	}
 }
