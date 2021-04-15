@@ -26,7 +26,7 @@ class User extends CI_Controller {
 	public function register()
 	{
 		$gender = $this->session->userdata('gender');
-		$data['sesi'] = $this->mod_user->ambil_sesi($gender, true);
+		$data['sesi'] = $this->mod_user->ambil_sesi($gender);
 
 		$this->load->view('fe/sambangan/create', $data);
 	}
@@ -46,7 +46,7 @@ class User extends CI_Controller {
 	        'nama_santri' => $nama_santri,
 	        'nama_walisantri' => $nama_walisantri,
 	        'kelas_santri' => $kelas_santri,
-	        'status' => 0,
+	        'status' => 1,
 	        'sesi' => $sesi,
 	        'created_at' => $this->createDate,
 	        'date_created' => date("Y-m-d"),
@@ -58,8 +58,8 @@ class User extends CI_Controller {
 		}
 
 		if($this->mod_user->checkLastVisit($id, $sesi)){
-			$this->session->set_flashdata('failed', 'Maaf, jatah sambangan anda pada bulan tersebut telah habis');
-			redirect(base_url().'index.php/user');
+			$this->session->set_flashdata('failed', 'Kuota sambangan anda pada bulan tersebut telah habis, sambangan masih diajukan');
+			$data['status'] = 0;
 		}
 
 	   	$this->mod_user->simpan_data($data);

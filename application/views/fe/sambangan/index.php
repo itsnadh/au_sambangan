@@ -57,6 +57,7 @@
                             	            <th>Nama Walisantri</th>
                             	            <th>Kelas Santri</th>
                             	            <th>Sesi Sambangan</th>
+                            	            <th>Status</th>
                             	            <th>Aksi</th>
                             	        </tr>
                             	    </thead>
@@ -72,13 +73,39 @@
                             	            <td><?php echo $_SESSION['nama_walisantri'] ?></td>
                             	            <td><?php echo $_SESSION['kelas_santri'] ?></td>
                             	            <td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
+											<td>
+												<?php
+												if(time() > strtotime($a->tanggal . ' ' . $a->jam_selesai)):
+													echo "Selesai";
+												else:
+													switch ((string) $a->status) {
+														case '0':
+															echo "Diajukan";
+															break;
+
+														case '1':
+															echo "OK";
+															break;
+
+														case '2':
+															echo "Ditolak";
+															break;
+													}
+												endif;
+												?>
+											</td>
                             	            <td>
-                            	                <a onclick="deleteSambangan(<?php echo $a->id ?>)" href="#">
-                            	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
-                                                </a>
-                            	                <a href="<?php echo base_url() . 'index.php/user/cetak/' . $a->id; ?>">
-                            	                    <button class="btn btn-xs btn-info" value="#" style="background-color: #29BF5B; border:none">Cetak Kartu</button>
-                                                </a>
+												<?php if(time() < strtotime($a->tanggal . ' ' . $a->jam_selesai)): ?>
+													<a onclick="deleteSambangan(<?php echo $a->id ?>)" href="#">
+														<button class="btn btn-xs btn-info" value="#" style="background-color: #F54747; border:none">Batalkan</button>
+													</a>
+													<?php if(((int) $a->status) == 1): ?>
+														<a href="<?php echo base_url() . 'index.php/user/cetak/' . $a->id; ?>">
+															<button class="btn btn-xs btn-info" value="#" style="background-color: #29BF5B; border:none">Cetak Kartu</button>
+														</a>
+													<?php endif; ?>
+												<?php else: ?> -
+												<?php endif; ?>
                                             </td>
                             	            <?php $no++ ?>
                             	        </tr>

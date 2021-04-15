@@ -10,52 +10,57 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="#">Dashboard</a>
+              <a href="#">Sesi</a>
             </li>
           </ol>
             
 		<!-- Icon Cards-->
+		<div class="row mb-2">
+			<div class="col-6">	
+		  		<h2>Daftar Sesi</h2>
+			</div>
+			<div class="col-6">
+				<a href="<?php echo base_url(); ?>index.php/admin/create_sesi" class="btn btn-primary float-right">Buat sesi</a>
+			</div>
+		</div>
 		<div class="row">
-			<div class="container">
-				<h4><a href="<?php echo base_url(); ?>index.php/admin/create_sesi">Buat sesi</a></h4>
-				<div class="table-responsive">
-					<table id="example" class="table table-striped table-bordered" style="width:100%">
-						<thead>
-							<tr>
-								<th>No</th>
-								<th>Jadwal Sesi</th>
-								<th>Gender</th>
-								<th>Kuota</th>
-								<th>Sisa</th>
-								<th>Aksi</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								$no = 0;
-								foreach ($sesi as $a) {
-									$no++;
-								?>
-							<tr>
-								<td><?php echo $no ?></td>
-								<td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
-								<td><?php echo $a->gender == "P" ? "Perempuan" : "Laki-laki" ?></td>
-								<td><?php echo $a->kuota ?></td>
-								<td><?php echo $a->kuota - $a->used ?></td>
-								<td>
-									<a href="<?php echo base_url().'index.php/admin/edit_sesi/' . $a->id; ?>">
-										<button class="btn btn-xs btn-info">Ubah</button>
-									</a>
-									<a href="#" onclick="deleteSesi('<?php echo $a->id ?>')">
-										<button class="btn btn-xs btn-danger">Hapus</button>
-									</a>
-								</td>
-							</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-              	</div>
-          	</div>
+			<div class="table-responsive col-12">
+				<table id="example" class="table table-striped table-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>Jadwal Sesi</th>
+							<th>Gender</th>
+							<th>Kuota</th>
+							<th>Sisa</th>
+							<th>Aksi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							$no = 0;
+							foreach ($sesi as $a) {
+								$no++;
+							?>
+						<tr>
+							<td><?php echo $no ?></td>
+							<td><?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai) ?></td>
+							<td><?php echo $a->gender == "P" ? "Perempuan" : "Laki-laki" ?></td>
+							<td><?php echo $a->kuota ?></td>
+							<td><?php echo $a->kuota - $a->used ?></td>
+							<td>
+								<a href="<?php echo base_url().'index.php/admin/edit_sesi/' . $a->id; ?>">
+									<button class="btn btn-xs btn-info">Ubah</button>
+								</a>
+								<a href="#" onclick="deleteSesi('<?php echo $a->id ?>')">
+									<button class="btn btn-xs btn-danger">Hapus</button>
+								</a>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- DataTable -->

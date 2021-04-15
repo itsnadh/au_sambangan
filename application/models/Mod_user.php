@@ -17,7 +17,7 @@ class Mod_user extends CI_Model {
 	public function load_data_sambangan($id)
 	{
 		$this->db->where('user_id', $id);
-		$this->db->select('tanggal, jam_mulai, jam_selesai, sesi_sambangan.id');
+		$this->db->select('tanggal, jam_mulai, jam_selesai, sesi_sambangan.id, status');
 		$this->db->join('list_sesi', 'list_sesi.id = sesi_sambangan.sesi');
 
         return $this->db->get('sesi_sambangan')->result();
@@ -35,12 +35,17 @@ class Mod_user extends CI_Model {
 
 	public function quotaCheck($id)
 	{
-		$this->db->select('list_sesi.id, kuota, COUNT(sesi) as used');
+		$this->db->select('list_sesi.id, kuota, status');
 		$this->db->join('sesi_sambangan', 'list_sesi.id = sesi_sambangan.sesi', 'left');
-		$this->db->group_by('list_sesi.id, kuota');
+		$this->db->where('list_sesi.id', $id);
 		$data = $this->db->get('list_sesi')->result();
+
+		$quota = $data[0]->kuota;
+		foreach ($data as $key => $value) {
+			if(((int) $value->status) == 1) $quota--;
+		}
 		
-		return $data[0]->used < $data[0]->kuota;
+		return $quota > 0;
 	}
 	
 	public function checkLastVisit($id, $sesi)
@@ -64,17 +69,27 @@ class Mod_user extends CI_Model {
 		return (int) substr($date, 5, 2) == (int) substr($sesi, 5, 2);
 	}
 
-	public function ambil_sesi($gender, $kuota = false)
+	public function ambil_sesi($gender)
 	{	
+		$this->db->select('list_sesi.id, tanggal, jam_mulai, jam_selesai, kuota');
 		$this->db->where('gender', $gender);
 		$this->db->where('jadwal_mulai >=', date('Y-m-d H:i:s'));
 
-		if($kuota){
-			$this->db->select('id, tanggal, jam_mulai, jam_selesai, kuota, COUNT(id) as used');
-			$this->db->group_by('id, tanggal, jam_mulai, jam_selesai, kuota');
+		$data = $this->db->get('list_sesi')->result();
+		foreach ($data as $key => $value) {
+			$this->db->select('count(*) as used');
+			$this->db->where('sesi', $value->id);
+			$this->db->where('status', 1);
+
+			try {
+				$used = $this->db->get('sesi_sambangan')->result()[0]->used;
+				$data[$key]->kuota -= $used;
+			} catch (\Throwable $th) {
+				//throw $th;
+			}
 		}
 
-		return $this->db->get('list_sesi')->result();
+		return $data;
 	}
 
 	public function isSambanganAuthorized($id, $user_id, $cetak = false)

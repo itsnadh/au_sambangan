@@ -6,7 +6,6 @@
 <link href="<?php echo base_url()."assets/new.css"; ?>" rel="stylesheet" id="bootstrap-css">
 <link rel="icon" href="<?php echo base_url('assets/logo.png'); ?>">
 <link href="<?php echo base_url()."assets/main.css"; ?>" rel="stylesheet">
-<script src="<?php echo base_url()."assets/bootstrap.min.js"; ?>"></script>
 <script src="<?php echo base_url()."assets/jquery.min.js";?>"></script>
 
 <style type="text/css">
@@ -32,7 +31,7 @@
                             <div class="col-sm-12" >
                                 <div class="">
                                 <?php
-                                    $attr = array('class'=>'horizontal-form', 'onClick'=>'validasi();');
+                                    $attr = array('class'=>'horizontal-form');
                                     echo form_open(base_url().'index.php/user/registration', $attr);
                                 ?>
                                     <br/>
@@ -62,10 +61,9 @@
 													<option selected disabled>-- Sesi / Sisa Kuota --</option>
 													<?php
 														foreach ($sesi as $a) {
-															$sisa = $a->kuota - $a->used;
 													?>
-														<option value="<?php echo $a->id ?>" <?php echo (!$sisa ? "disabled":"") ?>>
-															<?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai . ' / ' . ($sisa ?: "Habis")) ?>
+														<option value="<?php echo $a->id ?>" <?php echo (!$a->kuota ? "disabled":"") ?>>
+															<?php echo ($a->tanggal . ' ' . $a->jam_mulai . '-' . $a->jam_selesai . ' / ' . ($a->kuota ?: "Habis")) ?>
 														</option>
 													<?php } ?>
 												</select>
