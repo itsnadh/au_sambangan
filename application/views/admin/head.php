@@ -21,8 +21,8 @@
     <!-- Page level plugin CSS-->
     <!--<link href="<?php echo base_url().'assets/admin/'; ?>vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url().'assets/admin/'; ?>css/sb-admin.css" rel="stylesheet">
@@ -33,9 +33,9 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="index.html">ADMIN PPDB <script>
+      <a class="navbar-brand mr-1" href="index.html" style="font-size:18px">ADMIN SAMBANGAN <script>
               var CurrentYear = new Date().getFullYear()
-              document.write(CurrentYear)
+              // document.write(CurrentYear)
             </script> </a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">

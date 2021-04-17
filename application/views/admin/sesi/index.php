@@ -18,9 +18,10 @@
 		<div class="row mb-2">
 			<div class="col-6">	
 		  		<h2>Daftar Sesi</h2>
+				<a href="<?php echo base_url(); ?>index.php/admin/create_sesi" class="btn btn-success float-left">Buat sesi</a>
 			</div>
 			<div class="col-6">
-				<a href="<?php echo base_url(); ?>index.php/admin/create_sesi" class="btn btn-primary float-right">Buat sesi</a>
+				<!-- <a href="<?php echo base_url(); ?>index.php/admin/create_sesi" class="btn btn-primary float-left">Buat sesi</a> -->
 			</div>
 		</div>
 		<div class="row">
